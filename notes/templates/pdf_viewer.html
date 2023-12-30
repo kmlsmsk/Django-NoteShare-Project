@@ -1,0 +1,84 @@
+
+{% extends "homebase.html" %}
+{% load static %}
+
+
+{% block title %} {{pdf.title}} [Pdf Versiyonu] {% endblock title %}
+{% block keywords %} {{setting.keywords}} {% endblock keywords %}
+{% block description %} {{setting.description}} {% endblock description %}
+
+{% block head %} 
+<link rel='shortcut icon' type='image/x-icon' href='{{setting.icon.url}}'/>
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        if(window.location.hostname === "pdfobject.com"){
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag("js", new Date());
+            gtag("config", "G-DX6BNQ0S60");
+        }
+        </script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://unpkg.com/pdfobject@2.2.12/pdfobject.min.js"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
+
+
+<style>
+    .pdfobject-container { height: 50rem; border: 1rem solid rgba(0,0,0,.1); }
+</style>
+{% endblock head %}
+
+{% block content  %}  
+
+{% include "head.html" %}
+{% include "header.html" %}
+
+{% include "search.html" %}
+
+<section id="maincontent">
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+          <!-- strat question group 1 -->
+          <h4> <center> {{pdf.title}} [Pdf Versiyonu]  </h4></center>
+
+          <div class="accordion botspacer40" id="accordion">
+           
+            <div class="accordion-group">
+              <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse1">
+						
+					  </a>
+              </div>
+              <div id="collapse1" class="accordion-body collapse in">
+                <div class="accordion-inner">
+                  <p>
+                    <div id="example1"></div>
+                    <script> PDFObject.embed("{{pdf.filePdf.url}}", "#example1"); </script>
+                  </p>
+                  <center>Eğer PDF yüklenmediyse tarayıcıda açmak için <a href="{{pdf.filePdf.url}}"> tıklayınız.</a>
+                  </center></div>
+              </div>
+            </div>
+
+            
+          <!-- end question group 1 -->
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+ {% endblock content %}
+
+ <script src="https://unpkg.com/pdfobject@2.2.12/pdfobject.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js"></script>
+<script src="js/in-view.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@14.2.1/dist/smooth-scroll.min.js"></script>
+<script>
+     
+  {% include "footer.html" %}
+ 

@@ -1,0 +1,97 @@
+
+{% extends "homebase.html" %}
+{% load static %}
+
+
+{% block title %}  Email Listesi [ {{user.first_name}} {{user.last_name}} ]{% endblock title %}
+{% block keywords %} {{setting.keywords}} {% endblock keywords %}
+{% block description %} {{setting.description}} {% endblock description %}
+
+{% block head %} 
+<link rel='shortcut icon' type='image/x-icon' href='{{setting.icon.url}}'/>
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+{% endblock head %}
+
+{% block content  %}  
+
+{% include "head.html" %}
+{% include "header.html" %}
+
+{% include "search.html" %}
+ 
+
+<section id="maincontent">
+    <div class="container">
+      <div class="row">
+        <div class="span3">
+          <aside>
+            <div class="widget">
+              {% include "admin_panel.html" %}
+            </div>
+            <div class="widget">
+              
+            </div>
+          </aside>
+        </div>
+        <div class="span9">
+          <aside>
+            <div class="widget">
+              <div class="well well-info">
+                <center><b> <h3>E-MAİL LİSTESİ</b></h3></center>
+              </div>
+             
+              <table class="table">
+                <thead>
+                 
+                </thead>
+                <tbody>
+                  
+                  <tr>
+                                        
+                  </tr>
+                  
+                    
+                    {% for rs in list %}
+                    <tr>
+                    <th> <td> 
+                      <i class="icon-envelope icon-primary"></i> </td>
+                      <td>   {{rs.id}}  </td> <td> 
+                        {{rs.email}}
+                      </td>
+                     <td> {{rs.ip}} </td>
+                     <td> {{rs.create_at}} </td>
+                     <td>
+                      <a href="/curriculumVitae/deletemaillist/{{rs.id}}" onclick=" return confirm ('Silmek istediğinden emin misin?')" type="button" class="btn btn-warning"> Listeden Sil </button>
+                    </td>
+                  </th>
+                </tr>
+                    {% endfor %}
+                     
+                  
+                  
+                </tbody>
+              </table>
+
+
+
+
+      
+            </div>
+            <div class="widget">
+              
+            </div>
+          </aside>
+          
+          
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  {% endblock content  %}

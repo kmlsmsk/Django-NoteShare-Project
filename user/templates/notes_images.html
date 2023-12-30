@@ -1,0 +1,46 @@
+<!-- Contact Start -->
+{% load static %}
+{% include "head.html" %}
+
+<title> {{notes.title}} İçerik Galerisi</title>
+</head>
+<body>
+    <h4> <center> {{notes.title}} </h4></center>
+    <hr>
+    {% if messages %}  {% for message in messages%}
+        <div class="alert alert-{{message.tags}}" role="alert">
+          {{message}}
+        {% endfor %} {% endif %} 
+
+    <!-- Contact Start -->
+    <div class="container-fluid py-5">
+        <div class="container mx-auto">
+           <div class="span9">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="hidden" name="content_id" id="id_content_id" value="{{notes.id}}">
+                Resim Başlığı
+                <input type="text" name="title" class="input" placeholder="başlık yazınız" id="title">
+                <br>Resim Seç 
+                <input type="file" name="image" class="input" placeholder="Resim Seçiniz" accept="image/*" id="id_image">
+            </p> <br><button class="btn btn-primary" type="submit"> Resim Yükle </button>
+            </form>
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->
+<h4> <center> YÜKLENEN RESİMLER</h4></center>
+<hr>
+    <div class="container-fluid py-5">
+        <div class="container mx-auto">
+           {% for rs in images %}
+            <div class="span3">
+          <center>  <img src="{{rs.image.url}}" height="200"></p>
+            <a href="/user/deletenotesimage/{{rs.id}}" onclick=" return confirm ('Silmek istediğinden emin misin?')" type="button" class="btn btn-danger"> Resim Sil </a>
+          </center>      
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+ 

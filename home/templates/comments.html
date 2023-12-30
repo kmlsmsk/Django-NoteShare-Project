@@ -1,0 +1,252 @@
+
+{% load static %}
+
+{% include "head.html" %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.checked {
+  color: orange;
+}
+</style>
+
+  <style>
+
+    img.avatar {
+      width: 20%;
+      border-radius: 40%;
+    }
+    /* use display:inline-flex to prevent whitespace issues. alternatively, you can put all the children of .rating-group on a single line */
+    .rating-group {
+        display: inline-flex;
+    }
+
+    /* make hover effect work properly in IE */
+    .rating__icon {
+        pointer-events: none;
+    }
+
+    /* hide radio inputs */
+    .rating__input {
+        position: absolute !important;
+        left: -9999px !important;
+    }
+
+    /* set icon padding and size */
+    .rating__label {
+        cursor: pointer;
+        padding: 0 0.1em;
+        font-size: 2rem;
+    }
+
+    /* set default star color */
+    .rating__icon--star {
+        color: orange;
+    }
+
+    /* set color of none icon when unchecked */
+    .rating__icon--none {
+        color: #eee;
+    }
+
+    /* if none icon is checked, make it red */
+    .rating__input--none:checked + .rating__label .rating__icon--none {
+        color: red;
+    }
+
+    /* if any input is checked, make its following siblings grey */
+    .rating__input:checked ~ .rating__label .rating__icon--star {
+        color: #ddd;
+    }
+
+    /* make all stars orange on rating group hover */
+    .rating-group:hover .rating__label .rating__icon--star {
+        color: orange;
+    }
+
+    /* make hovered input's following siblings grey on hover */
+    .rating__input:hover ~ .rating__label .rating__icon--star {
+        color: #ddd;
+    }
+
+    /* make none icon grey on rating group hover */
+    .rating-group:hover .rating__input--none:not(:hover) + .rating__label .rating__icon--none {
+        color: #eee;
+    }
+
+    /* make none icon red on hover */
+    .rating__input--none:hover + .rating__label .rating__icon--none {
+        color: red;
+    }
+
+</style>
+<link rel="stylesheet" href="{% static "assets/star/font-awesome.min.css" %}">
+
+
+{% include "header.html" %}
+{% include "search.html" %}
+
+  <section id="maincontent">
+    <div class="container">
+      <div class="row">
+        <div class="span4">
+          <aside>
+            <div class="widget">
+              <h4 class="heading-success"><span class="btn btn-large btn-success">
+                <i class="m-icon-big-swapdown m-icon-white"></i></span>&nbsp;&nbsp;Notu Ekleyen Kişi</h4>
+              <center><img src="{{profile.image.url}}" class="avatar" alt="" />
+              <h5> {{profile.user_name}}</h5></center>
+              <p>
+              
+              </p>
+            </div>
+            <div class="widget">
+              <h4 class="heading-success"><span class="btn btn-large btn-success">
+                <i class="m-icon-big-swapdown m-icon-white"></i></span>&nbsp;&nbsp;Not Detayı</h4>
+              <ul class="project-detal">
+                
+                <li><label> Not Başlığı :</label> {{notes.title}}</li>
+                <li><label>Notun Kategorisi : {{notes.category}} </li>
+                <li><label> Açıklama :</label>{{notes.description}}</li>
+                <li><label>Anahtar Kelimeler :</label> {{notes.keywords}}</li>
+                
+              </ul>
+            </div>
+          </aside>
+        </div>
+        <div class="span8">
+          <article class="blog-post">
+            <div class="tooltip-demo headline">
+              <h4> <center> {{notes.category}} &rarr; {{notes.title}} </h4></center>
+              
+              <h6>{% if messages %}  {% for message in messages%}
+              <div class="alert alert-{{message.tags}}" role="alert">
+                {{message}}
+              </div>
+              {% endfor %} {% endif %}</h6>
+
+              <span class="comment">
+            </span>
+            </div>
+            <div class="clearfix"></div>
+            <div class="well"> <center>
+              <a href="#"><img src="{{notes.image.url}}" alt="" /></a>
+              <h5> {{notes.title}} </h5>
+            
+              </p>
+              <center> <a class="btn btn-medium btn-primary" href="/notes/pdf_view/{{notes.id}}"> Notun Pdf Versiyonu </a></center>
+              <p>
+            </div>
+          </article>
+          <!-- end article full post -->
+          <h4>Yorumlar</h4>
+          {%for rs in comments%}<ul class="media-list">
+           
+            
+            <li class="media">
+              <a class="pull-left" href="#"> {{rs.user.first_name}} {{rs.user.last_name}} [{{rs.user.username}}]
+                
+							<img class="media-object" src="{{rs.user.userprofile.image.url}}" width="70"/>
+						</a>
+
+              
+              <div class="media-body">
+                <h5 class="media-heading"><a href="#">  </a></h5>
+                <span>Ekleme Tarihi : {{rs.create_at |date:"d/m/Y"}} </span>
+                <h4> {{rs.subject}}</h4>
+                <p> {{rs.comment}} </p>
+                 
+                 
+                 <div id="full-stars-example -{{rs.title}}">
+                  <div class="rating-group">
+                      <label aria-label="1 star-{{rs.title}}" class="rating__label" for="rating-1-{{rs.title}}">
+                        <i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                      <input class="rating__input" name="r-{{rs.title}}" id="rating-1-{{rs.title}}" value="1" type="radio" {% if rs.rate == 1%} checked {%endif%}>
+                      <label aria-label="2 stars-{{rs.title}}" class="rating__label" for="rating-2-{{rs.title}}">
+                        <i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                      <input class="rating__input" name="rater-{{rs.title}}" id="rating-2-{{rs.title}}" value="2" type="radio" {% if rs.rate == 2%} checked {%endif%}>
+                      <label aria-label="3 stars-{{rs.title}}" class="rating__label" for="rating-3-{{rs.title}}">
+                        <i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                      <input class="rating__input" name="r-{{rs.title}}" id="rating-3-{{rs.title}}" value="3" type="radio" {% if rs.rate == 3%} checked {%endif%}>
+                      <label aria-label="4 stars-{{rs.title}}" class="rating__label" for="rating-4-{{rs.title}}">
+                        <i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                      <input class="rating__input" name="rater-{{rs.title}}" id="rating-4-{{rs.title}}" value="4" type="radio" {% if rs.rate == 4%} checked {%endif%}>
+                      <label aria-label="5 stars-{{rs.title}}" class="rating__label" for="rating-5-{{rs.title}}">
+                        <i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                      <input class="rating__input" name="r-{{rs.title}}" id="rating-5-{{rs.title}}" value="5" type="radio" {% if rs.rate == 5%} checked {%endif%}>
+                  </div>&nbsp;&nbsp; &nbsp;&nbsp; <b> [Not Puanı : {{rs.rate}} ] </b>
+              </div>
+                  
+                  
+                   <br>
+                <a class="btn btn-small" href="">Yorum Yap</a>
+              </div> 
+            </li>{%endfor%}
+          </ul>
+          <div class="comment-post">
+            <h4>Notla İlgili Yorum Yap</h4>
+            <form action="/notes/addcomment/{{notes.id}}" method="POST" class="comment-form" name="comment-form">
+              {% csrf_token %}
+              <div class="row">
+                <div class="span3">
+                  <label>Konu <span>*</span></label>
+                  <input type="text" name="subject" lass="input-block-level" placeholder="Konu yazın" />
+                </div>
+                
+                <div class="span3">
+                  <label>Puan ver</label>
+                  
+                  <div id="full-stars-example">
+                    <div class="rating-group">
+                        <label aria-label="1 star" class="rating__label" for="rating-1"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                        <input class="rating__input" name="rate" id="rating-1" value="1" type="radio" checked>
+                        <label aria-label="2 stars" class="rating__label" for="rating-2"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                        <input class="rating__input" name="rate" id="rating-2" value="2" type="radio" >
+                        <label aria-label="3 stars" class="rating__label" for="rating-3"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                        <input class="rating__input" name="rate" id="rating-3" value="3" type="radio">
+                        <label aria-label="4 stars" class="rating__label" for="rating-4"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                        <input class="rating__input" name="rate" id="rating-4" value="4" type="radio">
+                        <label aria-label="5 stars" class="rating__label" for="rating-5"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                        <input class="rating__input" name="rate" id="rating-5" value="5" type="radio">
+                    </div>
+                </div>
+
+
+                </div>
+                <div class="span8">
+                  <label>Yorumunuz <span>*</span></label>
+                  <textarea rows="9" name="comment" class="input-block-level" placeholder="Yorum yapmak için düzgün cümleler kullanarak yazınız..."></textarea>
+                  {%if user.id is not None %}
+                  <button type="Submit" class="btn btn-success" data-loading-text="Yorum yap...">Yorum Yap</button>
+                  {%else%} Yorum Eklemek için <a href="/login"> Login </a>Olunuz! {%endif%}
+                  <button class="btn btn-medium btn-orange"  type="reset">Temizle</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% include "footer.html" %}
+
+  <script src="{% static "assets/js/jquery-1.8.2.min.js" %}"></script>
+  <script src="{% static "assets/js/jquery.easing.1.3.js" %}"></script>
+  <script src="{% static "assets/js/google-code-prettify/prettify.js" %}"></script>
+  <script src="{% static "assets/js/modernizr.js" %}"></script>
+  <script src="{% static "assets/js/bootstrap.js" %}"></script>
+  <script src="{% static "assets/js/jquery.elastislide.js" %}"></script>
+  <script src="{% static "assets/js/jquery.prettyPhoto.js" %}"></script>
+  <script src="{% static "assets/js/application.js" %}"></script>
+  <script src="{% static "assets/js/portfolio/jquery.quicksand.js" %}"></script>
+  <script src="{% static "assets/js/portfolio/setting.js" %}"></script>
+  <script src="{% static "assets/js/hover/jquery-hover-effect.js" %}"></script>
+  <script src="{% static "assets/js/hover/setting.js" %}"></script>
+
+  <!-- Template Custom JavaScript File -->
+  <script src="{% static "assets/js/custom.js" %}"></script>
+
+</body>
+
+</html>

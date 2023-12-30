@@ -1,0 +1,140 @@
+
+{% extends "homebase.html" %}
+{% load static %}
+
+
+{% block title %} Profile [ {{user.first_name}} {{user.last_name}} ]{% endblock title %}
+{% block keywords %} {{setting.keywords}} {% endblock keywords %}
+{% block description %} {{setting.description}} {% endblock description %}
+
+{% block head %} 
+<link rel='shortcut icon' type='image/x-icon' href='{{setting.icon.url}}'/>
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+{% endblock head %}
+
+{% block content  %}  
+
+{% include "head.html" %}
+{% include "header.html" %}
+
+{% include "search.html" %}
+ 
+
+<section id="maincontent">
+    <div class="container">
+      <div class="row">
+        <div class="span3">
+          <aside>
+            <div class="widget">
+              {% include "user_panel.html" %}
+            </div>
+            <div class="widget">
+              
+            </div>
+          </aside>
+        </div>
+        <div class="span9">
+          <aside>
+            <div class="widget">
+             
+              <table class="table">
+                <thead>
+                  <tr>
+                    <td colspan="3">
+                      <center><img src="{{profile.image.url}}" class="avatar" height="30">
+                      </center></td>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                  <tr>
+                    
+                   
+                      
+                    
+                  </tr>
+                  <tr>
+                    
+                    <td>
+                      <center><h3> {{profile.user_name}}</h3>
+                      </center></td>
+
+                      <div class="well well-primary">
+                        <center><b> <h3>KİŞİSEL BİLGİLER </b></h3></center>
+                      </div>
+                      <td><a href="/user/update" class="btn btn-large btn-block btn-success" type="button">Bilgilerimi Güncelle</a>
+                      </td><td><a href="/user/{{profile.id}}/password " class="btn btn-large btn-block btn-warning" type="button">Şifremi Değiştir</a>
+                      </td>
+
+                    
+                  </tr>
+                  
+                </tbody>
+              </table>
+
+
+
+
+              <table class="table">
+                <thead>
+                 
+                </thead>
+                <tbody>
+                 
+                 
+                  <tr>
+                    <td>Kullanıcı Adı </td> <td>  </td>
+                    <td> {{profile.user.username}} </td>
+                  </tr>
+                  <tr>
+                    <td>Adı-Soyadı </td> <td>  </td>
+                    <td> {{profile.user_name}} </td>
+                  </tr>
+                  <tr>
+                    <td>Email </td><td>  </td>
+                    <td> {{profile.user.email}} </td>
+                  </tr>
+                  <tr>
+                    <td>Telefon </td><td>  </td>
+                    <td> {{profile.phone}} </td>
+                  </tr>
+                  <tr>
+                    <td>Adres </td> <td>  </td>
+                    <td> {{profile.address}} </td>
+                  </tr>
+
+                  <tr>
+                    <td>Şehir </td> <td>  </td>
+                    <td> {{profile.city}} </td>
+                  </tr>
+
+                  <tr>
+                    <td>Ülke </td> <td>  </td>
+                    <td> {{profile.country}} </td>
+                  </tr>
+                  
+                </tbody>
+              </table>
+
+
+
+            </div>
+            <div class="widget">
+              
+            </div>
+          </aside>
+          
+          
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  {% endblock content  %}

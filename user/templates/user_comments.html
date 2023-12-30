@@ -1,0 +1,96 @@
+
+{% extends "homebase.html" %}
+{% load static %}
+
+
+{% block title %} Not Yorumları [ {{user.first_name}} {{user.last_name}} ]{% endblock title %}
+{% block keywords %} {{setting.keywords}} {% endblock keywords %}
+{% block description %} {{setting.description}} {% endblock description %}
+
+{% block head %} 
+<link rel='shortcut icon' type='image/x-icon' href='{{setting.icon.url}}'/>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+{% endblock head %}
+
+{% block content  %}  
+
+{% include "head.html" %}
+{% include "header.html" %}
+
+{% include "search.html" %}
+ 
+
+<section id="maincontent">
+    <div class="container">
+      <div class="row">
+        <div class="span3">
+          <aside>
+            <div class="widget">
+              {% include "user_panel.html" %}
+            </div>
+            <div class="widget">
+              
+            </div>
+          </aside>
+        </div>
+        <div class="span9">
+          <aside>
+            <div class="widget">
+              <div class="well well-danger">
+                <center><b> <h3>NOT YORUM BİLGİLERİM </b></h3></center>
+              </div>
+
+              <table class="table table-bordered">
+
+                <thead>
+                  
+                </thead>
+                <tr>
+                  <th> </th>
+                  <th> Not Başlığı</th>
+                  <th> Konu </th>
+                  <th> Yorum </th>
+                  <th> Puan </th>
+                  <th> Durum </th>
+                  <th> Eklenme Tarihi </th>
+                  <th>  </th>
+                </tr>
+                {% for rs in comments %}
+                <tr>
+                  <th> <a href="{% url 'note_details' rs.note.id rs.note.slug %}">
+                    <img src="{{rs.note.image.url}}"></a> </th>
+                  <th> <a href="{% url 'note_details' rs.note.id rs.note.slug %}">
+                    {{rs.note.title}} </a> </th>
+                  <th>{{rs.subject}} </th>
+                  <th> {{rs.comment}}</th>
+                  <th> {{rs.rate}}</th>
+                  <th> {{rs.status}} </th>
+                  <th> {{rs.create_at  |date:"d/m/Y" }}</th>
+                  <th> 
+                    <a href="/user/deletecomment/{{rs.id}}" onclick=" return confirm ('Silmek istediğinden emin misin?')" type="button" class="btn btn-danger"> Sil </button>
+                    </th>
+                </tr>
+
+                {% endfor %}               
+
+              </table>             
+
+
+
+            </div>
+            <div class="widget">
+              
+            </div>
+          </aside>
+          
+          
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  {% endblock content  %}

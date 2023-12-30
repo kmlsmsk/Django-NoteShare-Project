@@ -1,0 +1,114 @@
+
+{% load static %}
+
+
+
+<!-- Footer
+ ================================================== -->
+ <footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="span4">
+        <div class="widget">
+          <h4>Hakkımızda</h4>
+          <address>
+        <strong>{{settings.company}} </strong><br>
+        {{settings.address}}<br>
+        <br>
+        <abbr title="Phone">Tel:</abbr> {{settings.phone}}
+        </address>
+
+          <address>
+        <strong>Bize Ulaşın</strong><br>
+        <a href="mailto:{{settings.email}}">{{settings.email}}</a>
+        </address>
+        </div>
+      </div>
+      <div class="span4">
+        <div class="widget">
+          <h4>Sayfalara Göz Atın</h4>
+          <ul class="nav nav-list regular">
+            <li class="nav-header">Daha Fazlası İçin</li>
+            <li><a href="#">Çalışmalarımız</a></li>
+            <li><a href="#">Hedeflerimiz</a></li>
+            <li><a href="#">Senaryolarımız</a></li>
+            <li class="nav-header">Hızlı Bağlantılar</li>
+            <li><a href="#">Ödüllerimiz</a></li>
+            <li><a href="#">Ekibimiz</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="span4">
+        <div class="widget">
+          <h4>Gelişmelerden Haberdar Olmak İçin</h4>
+          <form class="form-horizontal" action="/curriculumVitae/addlistmail/" method="post">
+            {% csrf_token %}
+            <fieldset>
+
+              <p>
+                E-posta güncellemeleri için kaydolun ve güncel gelişmelerden haberdar olun...
+              </p>
+
+              <div class="input-prepend input-append">
+                <input class="span2" id="email" name="email" type="text" placeholder="Email">
+                <button class="btn btn-inverse" type="submit">Abone Ol!</button>
+                
+              </div>
+            </fieldset>
+          </form>
+          <ul class="social_small">
+            <li class="facebook first"><a href="{{settings.facebook}}" title="Facebook">Facebook</a></li>
+            <li class="twitt"><a href="{{settings.twitter}}" title="Twitter">Twitter</a></li>
+            <li class="googleplus"><a href="{{settings.instagram}}" title="Instagram">Instagram</a></li>
+            <li class="flickr"><a href="{{settings.linkedin}}" title="Linkedin">Linkedin</a></li>
+            <li class="dribbble"><a href="{{settings.youtube}}" title="Youtube">Youtube</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="verybottom">
+    <div class="container">
+      <div class="row">
+        <div class="span6">
+          <p>&copy; Kemal ŞİMŞEK &copy; 2023 &copy; </p>
+        </div>
+        <div class="span6">
+          <div class="pull-right">
+            <div class="credits">
+              
+              Designed by <a href="https://www.linkedin.com/in/kmlsmsk/"> Kemal ŞİMŞEK</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+
+
+  <script src="{% static "assets/js/jquery-1.8.2.min.js" %}"></script>
+  <script src="{% static "assets/js/jquery.easing.1.3.js" %}"></script>
+  <script src="{% static "assets/js/google-code-prettify/prettify.js" %}"></script>
+  <script src="{% static "assets/js/modernizr.js" %}"></script>
+  <script src="{% static "assets/js/bootstrap.js" %}"></script>
+  <script src="{% static "assets/js/jquery.elastislide.js" %}"></script>
+  <script src="{% static "assets/js/jquery.flexslider.js" %}"></script>
+  <script src="{% static "assets/js/jquery.prettyPhoto.js" %}"></script>
+  <script src="{% static "assets/js/application.js" %}"></script>
+  <script src="{% static "assets/js/hover/jquery-hover-effect.js" %}"></script>
+  <script src="{% static "assets/js/hover/setting.js" %}"></script>
+  <script src="{% static "assets/js/camera/camera.min.js" %}"></script>
+  <script src="{% static "assets/js/camera/setting.js" %}"></script>
+
+
+  <!-- Template Custom JavaScript File -->
+  <script src="{% static "assets/js/custom.js" %}"></script>
+  
+  <!-- Start Extra JavaScript File -->
+  
+<script src="{% static "assets/js/portfolio/jquery.quicksand.js" %}"></script>
+

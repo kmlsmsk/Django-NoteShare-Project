@@ -1,0 +1,112 @@
+{% extends "homebase.html" %}
+{% load static %}
+
+
+{% block title %} {{content.type}} {% endblock title %}
+{% block keywords %} {{setting.keywords}} {% endblock keywords %}
+{% block description %} {{setting.description}} {% endblock description %}
+
+{% block head %} 
+<link rel='shortcut icon' type='image/x-icon' href='{{setting.icon.url}}'/>
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+{% endblock head %}
+
+{% block content  %}  
+
+{% include "head.html" %}
+{% include "header.html" %}
+
+{% include "search.html" %}
+
+<!-- divider -->
+<div class="row">
+  <div class="span12">
+    <div class="divider"></div>
+  </div>
+</div>
+<!-- end divider -->
+
+<div class="container">
+<div class="row">
+  
+  <div class="span6">
+    <h3 class="heading-success"><span class="btn btn-large btn-success">
+      <i class="m-icon-big-swapright m-icon-white"></i></span>
+      &nbsp;&nbsp; İçerik Resim Galerisi</h3>
+
+    <div id="myCarousel" class="carousel slide testimonials">
+      <div class="carousel-inner">
+        <div class="item active">
+          
+          <div class="testimonial">
+            <img src="{{content.image.url}}" alt="" />
+            <blockquote>
+              <p>
+               
+              </p>
+            </blockquote>
+            <div class="info">
+              <span class="author"><strong> <a href="#">Görsel Adı: {{content.title}} </a> </strong></span>
+              <span class="company">  </span>
+            </div>  
+          </div> 
+        </div>
+        {% for rs in images %}
+        <div class="item">
+          <div class="testimonial">
+            <img src="{{rs.image.url}}" alt="" />
+            <blockquote>
+              
+            </blockquote>
+            <div class="info">
+              <span class="author"><strong><a href="#"> Görsel Adı: {{rs.title}} </a></strong></span>
+              <span class="company"> </span>
+            </div>
+          </div>
+        </div> {%endfor%}
+      </div>
+      <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+      <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+    </div>
+  </div>
+  
+
+  <div class="span6">
+    <h3 class="heading-success"><span class="btn btn-large btn-success">
+      <i class="m-icon-big-swapright m-icon-white"></i></span>
+      &nbsp;&nbsp;{{content.title}}   </h3>
+    <div class="accordion" id="accordion2">
+      <div class="accordion-group">
+        <div class="accordion-heading">
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+            {{content.title}}
+      </a>
+        </div>
+        <div id="collapseOne" class="accordion-body collapse in">
+          <div class="accordion-inner">
+            
+            <p>
+             {{content.detail | safe}}
+            </p>
+           <center> <a class="btn btn-medium btn-orange" href="/content/contentComment/{{content.id}}"> Yorum Yap / Yapılan Yorumlar</a></center>
+          </div>
+        </div>
+      </div>
+      
+      
+      
+    </div>
+  </div>
+</div>
+</div
+
+ {% endblock content %}
+     
+  {% include "footer.html" %}
+ 
+
+

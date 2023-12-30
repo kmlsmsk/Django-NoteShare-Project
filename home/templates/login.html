@@ -1,0 +1,95 @@
+{% load static %}
+{% include "head.html" %}
+
+<style>
+
+
+  
+  img.avatar {
+    width: 50%;
+    border-radius: 50%;
+  }
+  
+  
+  span.psw {
+    float: center;
+    padding-top: 16px;
+  }
+  
+  </style>
+</head>
+
+
+{% include "header.html" %}
+
+{% include "search.html" %}
+
+<div>
+  <h6>{% if messages %}  {% for message in messages%}
+    <div class="alert alert-{{message.tags}} " role="alert">
+      {{message}}
+    </div>
+    {% endfor %} {% endif %}</h6>
+
+</div>
+
+<div class="row">
+
+  <div class="span4">
+   
+  </div>
+
+  <div class="span4">
+    <br><br><br>
+
+    <form class="form-horizontal" action="/login/" method="POST">
+      {% csrf_token %}
+
+
+      <div class="control-group">
+        <label class="control-label" for="inputEmail">Kullanıcı Adı : </label>
+        <div class="controls">
+          <input type="text" name="username" id="username" placeholder="Kullanıcı Adı">
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="inputPassword"> Şifre : </label>
+        <div class="controls">
+          <input class="" type="password" id="password" name="password" placeholder="Şifre">
+        </div>
+      </div>
+      <div class="control-group">
+        <div class="controls">
+          <label class="checkbox">
+            
+          </label>
+       <center>   <button type="submit" class="btn btn-success">Giriş</button></center>
+        </div>
+      </div>
+    </form>
+
+
+
+  </div>
+
+  <div class="span3">
+    <br><br><br><center>
+    <img src="{% static "assets/img/user.png" %}" class="avatar"></center>
+  </div>
+
+
+</div>
+
+
+<form >
+    
+    <div class="center">
+    
+     
+    
+   
+
+
+  
+
+  {% include "footer.html" %}

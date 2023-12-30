@@ -1,0 +1,103 @@
+
+{% extends "homebase.html" %}
+{% load static %}
+
+
+{% block title %} İçerikler [ {{user.first_name}} {{user.last_name}} ] {% endblock title %}
+{% block keywords %} {{setting.keywords}} {% endblock keywords %}
+{% block description %} {{setting.description}} {% endblock description %}
+
+{% block head %} 
+<link rel='shortcut icon' type='image/x-icon' href='{{setting.icon.url}}'/>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+{% endblock head %}
+
+{% block content  %}  
+
+{% include "head.html" %}
+{% include "header.html" %}
+
+{% include "search.html" %}
+ 
+
+<section id="maincontent">
+    <div class="container">
+      <div class="row">
+        <div class="span3">
+          <aside>
+            <div class="widget">
+              {% include "user_panel.html" %}
+            </div>
+            <div class="widget">
+              
+            </div>
+          </aside>
+        </div>
+        <div class="span9">
+          <aside>
+            <div class="widget">
+
+              <div class="well well-warning">
+                <center><b> <h3>EKLENEN İÇERİKLER</b></h3></center>
+              </div>
+
+              <table class="table table-bordered">
+
+                <thead>
+                  
+                </thead>
+                <tr>
+                  <th> İçerik Resmi</th>
+                  <th> İçerik Başlığı</th>
+                  <th> İçerik Tipi </th>
+                  <th> Eklenme Tarihi</th>
+                  <th> Güncellenme Tarihi</th>
+                  
+                  <th> Durumu </th>
+                  <th> Resim Galerisi</th>
+                  <th> Güncelle </th>
+                  <th> İçerik Sil </th>
+                </tr>
+                {% for rs in contents %}
+                <tr>
+                  <th> <a href="/contents/{{rs.id}}/{{rs.slug}}">
+                    <img src="{{rs.image.url}}" width="150"></a> </th>
+                  <th> <a href="/contents/{{rs.id}}/{{rs.slug}}">
+                    {{rs.title}} </a> </th>
+                  <th>{{rs.type}} </th>
+                  <th> {{rs.create_at |date:"d/m/Y"}}</th>
+                  <th> {{rs.update_at |date:"d/m/Y"}}</th>
+                  
+                  <th> {{rs.status}} </th>
+                  <th> <a href="javascript:;" onclick="window.open('/user/addgalimage/{{rs.id}}', 'gallery', 'height=800, width=800, top=50, left=150')"> 
+                    <img src="{% static "/img/galleryX.png" %}" </th></a>
+                  <th> <a href="/user/contentedit/{{rs.id}}" type="button" class="btn btn-primary"> Güncelle </button>
+                  </th>
+                  <th> 
+                    <a href="/user/deletecontent/{{rs.id}}" onclick=" return confirm ('Silmek istediğinden emin misin?')" type="button" class="btn btn-danger"> Sil </button>
+                    </th>
+                </tr>
+
+                {% endfor %}               
+
+              </table>             
+
+
+
+            </div>
+            <div class="widget">
+              
+            </div>
+          </aside>
+          
+          
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  {% endblock content  %}

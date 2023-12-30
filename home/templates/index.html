@@ -1,0 +1,14 @@
+{% extends 'homebase.html' %}
+
+{% block title %} {{ settings.title }} {% endblock %}
+{% block description %} {{ settings.description }} {% endblock %}
+{% block keywords %} {{ settings.keywords }} {% endblock %}
+
+
+{% block header %} {% include "header.html" %} {% endblock header %}
+
+{% block search %}{% include "search.html" %} {% endblock search %}
+
+ {% block slider %} {% include "slider.html" %}{% endblock slider %}
+ 
+{% block content %} {% include "content.html" %} {% endblock content %}

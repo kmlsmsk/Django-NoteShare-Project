@@ -1,0 +1,143 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="utf-8">
+    <title> Contacts </title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Kemal ŞİMŞEK " name="keywords">
+    <meta content="Kemal ŞİMŞEK " name="description">
+
+    <!-- Favicon -->
+    <link href="{% static "cv/img/favicon.ico" %}" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static "cv/lib/owlcarousel/assets/owl.carousel.min.css" %}" rel="stylesheet">
+    <link href="{% static "cv/lib/lightbox/css/lightbox.min.css" %}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static "cv/css/style.css" %}" rel="stylesheet">
+</head>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="51">
+   
+
+
+    
+
+
+    <!-- Contact Start -->
+    <div class="container-fluid py-5" id="contact">
+        <div class="container">
+            <div class="position-relative d-flex align-items-center justify-content-center">
+                <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">Bize Ulaşın</h1>
+                <h1 class="position-absolute text-uppercase text-primary">İletişim</h1>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="widget">
+                        {% if messages %}
+                        {% for message in messages %}
+                        <div style="color: #d43f3a; font-size: medium">
+                          {{message | safe}}
+                          {% endfor %}  {% endif %}  </div> </div 
+
+                    <div class="contact-form text-center">
+                        <div id="success"></div>
+                        <form name="sentMessage" method="POST" action="" novalidate="novalidate" >
+                          {% csrf_token %}
+                            <div class="form-row">
+                                <div class="control-group col-sm-6">
+                                    <input type="text" class="form-control p-4" name="name" id="name" placeholder="Ad-Soyad"
+                                        required="required" data-validation-required-message="Lütfen Adınızı ve Soyadınızı Giriniz!" />
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="control-group col-sm-6">
+
+                                    
+                                    <input type="email" name="email" class="form-control p-4" id="email" placeholder="Email"
+                                        required="required" data-validation-required-message="Lütfen email adresinizi giriniz!" />
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <input type="text" name="subject" class="form-control p-4" id="subject" placeholder="Konu"
+                                    required="required" data-validation-required-message="Lütfen bir konu giriniz!" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="control-group">
+                                <textarea class="form-control py-3 px-4" rows="5" name="message" id="message" placeholder="Mesaj"
+                                    required="required"
+                                    data-validation-required-message="Lütfen mesajınızı yazınız!"></textarea>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div> <center>
+                                <button class="btn btn-outline-primary" type="submit" id="sendMessageButton">Mesaj Gönder</button>
+                            </center></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->
+
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-primary text-white mt-5 py-5 px-sm-3 px-md-5">
+        <div class="container text-center py-5">
+            <div class="d-flex justify-content-center mb-4">
+                <a class="btn btn-light btn-social mr-2" href="https://twitter.com/kmlsmsk_"><i class="fab fa-twitter"></i></a>
+                <a class="btn btn-light btn-social mr-2" href="https://www.facebook.com/kemalls"><i class="fab fa-facebook-f"></i></a>
+                <a class="btn btn-light btn-social mr-2" href="https://www.linkedin.com/in/kmlsmsk/"><i class="fab fa-linkedin-in"></i></a>
+                <a class="btn btn-light btn-social" href="https://www.instagram.com/smskml/"><i class="fab fa-instagram"></i></a>
+            </div>
+            <div class="d-flex justify-content-center mb-3">
+                <a class="text-white" href="#">İletişim</a>
+                <span class="px-3">|</span>
+                <a class="text-white" href="#">Hakkımızda</a>
+                <span class="px-3">|</span>
+                <a class="text-white" href="#">FAQs</a>
+                <span class="px-3">|</span>
+                <a class="text-white" href="#">Yardım</a>
+            </div>
+            <p class="m-0">&copy; <a class="text-white font-weight-bold" href="#">İzmir</a>-2023. Designed by <a class="text-white font-weight-bold" href="https://www.linkedin.com/in/kmlsmsk/">Kemal ŞİMŞEK</a>
+            </p>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+    <!-- Scroll to Bottom -->
+    <i class="fa fa-2x fa-angle-down text-white scroll-to-bottom"></i>
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-outline-dark px-0 back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static "cv/lib/typed/typed.min.js" %}"></script>
+    <script src="{% static "cv/lib/easing/easing.min.js" %}"></script>
+    <script src="{% static "cv/lib/waypoints/waypoints.min.js" %}"></script>
+    <script src="{% static "cv/lib/owlcarousel/owl.carousel.min.js" %}"></script>
+    <script src="{% static "cv/lib/isotope/isotope.pkgd.min.js" %}"></script>
+    <script src="{% static "cv/lib/lightbox/js/lightbox.min.js" %}"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="{% static "cv/mail/jqBootstrapValidation.min.js" %}"></script>
+    <script src="{% static "cv/mail/contact.js" %}"></script>
+
+    <!-- Template Javascript -->
+    <script src="{% static "cv/js/main.js" %}"></script>
+</body>
+
+</html>

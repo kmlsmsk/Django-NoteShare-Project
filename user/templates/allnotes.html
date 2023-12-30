@@ -1,0 +1,118 @@
+
+{% extends "homebase.html" %}
+{% load static %}
+
+
+{% block title %}  Notlar [ {{user.first_name}} {{user.last_name}} ]{% endblock title %}
+{% block keywords %} {{setting.keywords}} {% endblock keywords %}
+{% block description %} {{setting.description}} {% endblock description %}
+
+{% block head %} 
+<link rel='shortcut icon' type='image/x-icon' href='{{setting.icon.url}}'/>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+{% endblock head %}
+
+{% block content  %}  
+
+{% include "head.html" %}
+{% include "header.html" %}
+
+{% include "search.html" %}
+ 
+
+<section id="maincontent">
+    <div class="container">
+      <div class="row">
+        <div class="span3">
+          <aside>
+            <div class="widget">
+              {% include "admin_panel.html" %}
+            </div>
+            <div class="widget">
+              
+            </div>
+          </aside>
+        </div>
+        <div class="span9">
+          <aside>
+            <div class="widget">
+
+              <div class="container mx-auto">
+                <div class="span9">
+                  <div class="well well-success">
+                    <center><b> <h3>EKLENEN NOTLAR</b></h3></center>
+                  </div>
+
+            <table class="table table-striped table-warning">
+                <thead>
+                    <tr>
+                      <th scope="col">Not Görseli</th>
+                      <th scope="col">Not Kategorisi</th>
+                      <th scope="col">Paylaşma Durumu</th>
+                      <th scope="col">Onay Durumu</th>
+                      <th scope="col">Not Başlığı</th>
+                      <th scope="col">Not Resim Galerisi</th>
+                      <th scope="col">Güncelle</th>
+                      <th scope="col">Silme İşlemi</th>
+                    </tr>
+                  </thead>   
+                  <tbody>
+                    {% for rs in notes %}
+                    <tr>
+                      <th scope="row">
+                        <div class="thumbnails">
+                          <a href="/notes/{{rs.id}}/{{rs.slug}}/"><img class="thumbnail" src= "{{rs.image.url}}" width="230"></a>
+                        </div>
+                        </th>
+                      <td> {{rs.category}} </td>
+                      <td>  {% if rs.share == 'True'  %}
+                        <input type="checkbox" checked onchange="document.location.href='/user/adminnotshare/{{rs.id}}';"/>
+                           {% else %}
+                           <input type="checkbox" onchange="if(this.checked) document.location.href='/user/adminaddshare/{{rs.id}}';"/>
+                          {% endif %}
+                        <br> <br>{{rs.share}}
+                      </td>
+                      <td>  {% if rs.status == 'True'  %}
+                        <input type="checkbox" checked onchange="document.location.href='/user/adminnotaccept/{{rs.id}}';"/>
+                           {% else %}
+                           <input type="checkbox" onchange="if(this.checked) document.location.href='/user/adminaccept/{{rs.id}}';"/>
+                          {% endif %}
+                        <br><br> {{rs.status}}
+                      </td>
+                      
+                      <td> <a href="/notes/{{rs.id}}/{{rs.slug}}/">{{rs.title}}</a></td>
+                      <th> <a href="javascript:;" onclick="window.open('/user/addimages/{{rs.id}}', 'gallery', 'height=800, width=800, top=50, left=150')"> 
+                        <img src="{% static "/img/galleryX.png" %}" </th></a>
+                      <th> <a href="/user/adminupdatenotes/{{rs.id}}" type="button" class="btn btn-primary"> Güncelle </button>
+                      </th>
+                      
+
+
+                      <td>
+                        <a href="/user/admindeletenotes/{{rs.id}}" onclick=" return confirm ('Silmek istediğinden emin misin?')" type="button" class="btn btn-danger"> Sil </button>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                    
+            </table>
+            </div>
+            </div>
+
+
+            <div class="widget">
+              
+            </div>
+          </aside>
+          
+          
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  {% endblock content  %}

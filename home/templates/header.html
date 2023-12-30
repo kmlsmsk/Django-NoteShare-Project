@@ -1,0 +1,202 @@
+{% load static %}
+
+<style>
+
+
+  img.avatar {
+    width: 35%;
+    border-radius: 40%;
+  }
+  
+  </style>
+
+<header>
+  <!-- Navbar
+  ================================================== -->
+  <div class="navbar navbar-fixed-top">
+   
+    <div class="navbar-inner bg-info mx-auto">
+      
+      
+      <div class="container">
+        <!-- logo -->
+
+        
+        <a class="brand logo" href="/">
+          
+          <img src="{% static "assets/img/logo.png" %}" width="180"/>
+        </a>
+       
+        <!-- end logo -->
+
+        
+        <!-- top menu -->
+        <div>
+          <nav>
+            <ul class="nav topnav">
+              <li class="dropdown bg-info success active">
+                <a href="/"><i class="icon-home icon-white"></i> Ana Sayfa</a>
+                <ul class="dropdown-menu">
+                                    
+                </ul>
+              </li>
+              {% load mptt_tags %}
+              <li class="dropdown primary">
+                <a href="#"><i class="icon-align-justify icon-white"></i> Kategoriler</a>
+                <ul class="dropdown-menu">
+                  {% recursetree category %}
+                <li class="dropdown"> <a href="{% url 'category_notes' node.id node.slug %}" class="dropdown-toggle" {% if not node.is_leaf_node %} data-toggle="dropdown" aria-expanded="true" {% endif %}>{{ node.title }}</a>
+                  {% if not node.is_leaf_node %}
+                  <ul class="dropdown-menu sub-menu">
+                    <li>{{ children }} </li>
+                    
+                  </ul>{% endif %}
+                </li>{% endrecursetree %}
+
+                </ul>
+              </li>
+              
+             
+              
+              
+              <li class="dropdown info">
+                <a href="#"><i class=" icon-th-large icon-white"></i> Menu</a>
+                <ul class="dropdown-menu">
+                  {% recursetree menu %}
+                <li class="dropdown"> <a href="/menu/{{node.id}}" class="dropdown-toggle" {% if not node.is_leaf_node %} data-toggle="dropdown" aria-expanded="true" {% endif %}>{{ node.title }}</a>
+                  {% if not node.is_leaf_node %}
+                  <ul class="dropdown-menu sub-menu">
+                    <li> {{ children }} </li>
+                    
+                  </ul>{% endif %}
+                </li>{% endrecursetree %}
+
+                </ul>
+              </li>
+
+              <li class="dropdown danger">
+                <a href="#"><i class="icon-folder-open icon-white"></i> Notlar</a>
+                <ul class="dropdown-menu">
+                                    
+                  <li><a href="/curriculumVitae/contentcategory/">Paylaşılan Notlar</a></li>
+                  
+                </ul>
+              </li>
+             
+              <li class="dropdown inverse">
+                <a href="#"><i class="icon-question-sign icon-white"></i> FAQ (SSS) </a>
+                <ul class="dropdown-menu">
+                                    
+                  <li><a href="/faq">Sıkça Sorulan Sorular</a></li>
+                  
+                </ul>
+              </li>
+              
+              <li class="dropdown danger">
+                <a href="#"><i class=" icon-hand-right icon-white"></i> Hakkımızda</a>
+                <ul class="dropdown-menu">
+                  <li><a href="{% url 'aboutus'%}">Hakkımızda</a></li>
+                  <li><a href="/curriculumVitae/">Özgeçmiş</a></li>
+                </ul>
+              </li>
+
+            
+
+              <li class="dropdown info">
+                <a href="#"><i class="icon-globe icon-white"></i> Referanslar</a>
+                <ul class="dropdown-menu">
+                  <li><a href="{% url 'references'%}">Referanslarımız</a></li>
+                                
+                  
+                </ul>
+              </li>
+
+              <li class="dropdown primary">
+                <a href="#"><i class="icon-envelope icon-white"></i> Bize Ulaşın</a>
+                <ul class="dropdown-menu">
+                  <li><a href="{% url 'contact'%}">İletişim</a></li>
+
+                  <li><a href="/curriculumVitae/contacts/">İletişim Formu</a></li>
+                                
+                  
+                </ul>
+              </li>
+
+              <li class="dropdown success">
+                {% if user.id is not None %}
+                
+                <a href="#"> <i class="icon-user icon-white"> </i>
+                   
+                   {{user.username}} </a>
+                <ul class="dropdown-menu">
+                  
+                  <li><a href="#"> <img src="{{user.userprofile.image.url}}" class="avatar">
+                  </a></li>
+
+                     {%if user.is_superuser %}
+                     <!-- <li><a href="/admin">Admin Paneli</a></li> -->
+                     <li><a href="/user/admin">Admin Paneli</a></li>
+
+                     {% endif %}
+                     <li><a href="/user/">Hesabım</a></li>
+
+                     <li><a href="/user/update">Hesap Güncelle</a></li>
+                     <li><a href="/user/{{user.id}}/password ">Şifre Değiştir</a></li>
+
+                     <li><a href="/user/addnotes">Not Ekle</a></li>
+
+                     <li><a href="/user/notes">Eklediğim Notlar
+                      <span class="badge badge-success">{{request.session.note_item}} </span>
+                    </a></li>
+
+                    <li><a href="/notelist/">Beğendiğim Notlar
+                      <span class="badge badge-primary">{{request.session.cart_item}} </span>
+                    </a></li>
+                    <li><a href="/user/comments">Not Yorumlarım
+                      <span class="badge badge-warning ">{{request.session.comments_item}} </span>
+                      
+                    </a></li>
+                      <li><a href="/user/contents">Eklediğim İçerikler
+                        <span class="badge badge-info">{{request.session.content_item}} </span>
+                      
+                    </a></li>
+                  
+                  
+
+                  <li><a href="/content/comments">İçerik Yorumlarım
+                    <span class="badge badge-inverse">{{request.session.contentcomments_item}} </span>
+                    
+                  </a></li>
+                
+                  
+                  <li><a href="/logout/"><span>Çıkış </span></a></li>
+                  
+                  
+                </ul>
+                {% else %}
+                <a href="#"> <img src="">
+                
+                  <i class=" icon-eye-open icon-white"></i> Login / Join </a>
+                <ul class="dropdown-menu">
+                  
+                  <li><a href="/login/">Login</a></li>
+                  <li><a href="/signup/">Sign Up</a></li>
+                  <li><a href="/help/">Help</a></li>
+                  
+                  
+                  </li>
+                </ul>
+                {%endif%}
+              </li>
+              <li>
+
+              </li>
+
+            </ul>
+          </nav>
+        </div>
+        <!-- end menu -->
+      </div>
+    </div>
+  </div>
+</header>

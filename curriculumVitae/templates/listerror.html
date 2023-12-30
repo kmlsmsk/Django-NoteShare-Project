@@ -1,0 +1,49 @@
+{% extends "homebase.html" %}
+{% load static %}
+
+
+{% block title %} Sıkça Sorulan Sorular (SSS) {% endblock title %}
+{% block keywords %} {{setting.keywords}} {% endblock keywords %}
+{% block description %} {{setting.description}} {% endblock description %}
+
+{% block head %} 
+<link rel='shortcut icon' type='image/x-icon' href='{{setting.icon.url}}'/>
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+{% endblock head %}
+
+{% block content  %}  
+
+{% include "head.html" %}
+{% include "header.html" %}
+
+{% include "search.html" %}
+
+<section id="maincontent">
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+          <!-- strat question group 1 -->
+          <h2> <center><b> <font color="red"> Mail Adresniz Kayıtlı! </h2>
+            <br><center> <br> Mail adresiniz: <font color="blue"> {{mail}} </font></center><br>
+            <br>
+           <h4> <center> <a href="/"><i class=" icon-hand-right"></i> Ana Sayfaya Dön</a>
+            
+            </center></h4>
+
+          
+            
+          <!-- end question group 1 -->
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+ {% endblock content %}
+     
+  {% include "footer.html" %}
+ 

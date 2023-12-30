@@ -1,0 +1,31 @@
+
+{% load static %}
+
+<!-- slider Start -->
+<section id="intro">
+    <div class="jumbotron masthead">
+      <div class="container">
+        <div class="row">
+          <div class="span12">
+            <div class="camera_wrap camera_black_skin" id="camera_wrap_2">
+              
+              {% for rs in sliderData  %}
+
+              <div data-thumb="{{rs.image.url}}"  data-src="{{rs.image.url}}">
+                <div class="camera_caption fadeFromBottom">
+                  <a href="/notes/{{rs.id}}/{{rs.slug}}"><h2>{{rs.title}}</h2></a>
+                  <div class="hidden-phone">
+                    <p>
+                      {{rs.description}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- slider End -->

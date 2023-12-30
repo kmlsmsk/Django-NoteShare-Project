@@ -1,0 +1,119 @@
+<!-- Contact Start -->
+{% load static %}
+
+{% include "head.html" %}
+{% include "header.html" %}
+{% include "search.html" %}
+
+ 
+   
+  
+    <section id="maincontent">
+      <div class="container">
+        <div class="row-fluid">
+          <div class="span12">
+            
+            {% if page_obj.paginator.num_pages > 0 %}
+            <div class="pagination pagination-right">
+              <ul>
+                {% if page_obj.has_previous %}
+                <li><a href="?page={{ page_obj.previous_page_number }}">Prev</a></li>
+                {% else %}
+                <li ><a href="#">Prev</a></li>
+                {% endif %}
+                {% for i in page_obj.paginator.page_range %}
+                {% if page_obj.number == i %}
+                <li class="active"><a href="#">{{i}}</a></li>
+                {% else %}
+                <li ><a href="?page={{i}}">{{i}}</a></li>
+               {% endif %}
+              {% endfor %}
+                
+                {% if page_obj.has_next %}
+
+                <li ><a href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                {% else %}
+
+                 
+                <li><a href="#">Next</a></li>
+            
+            {% endif %}
+            
+              </ul> {% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <ul class="portfolio-area da-thumbs">
+            
+            {% for rs in page_obj %}
+            <li class="portfolio-item2" data-id="id-0" data-type="web">
+              <div class="span4">
+                <div class="thumbnail">
+                  <div class="image-wrapp mx-auto" >
+                    <img src="{{rs.image.url}}" class="align-center" alt="Portfolio name" title="" />
+                    <article class="da-animate da-slideFromRight" style="display: block;">
+                      <a class="link_post" href="{% url 'note_details' rs.id rs.slug %}"><img src="{% static "assets/img/icons/link_post_icon.png" %}" alt="" /></a>
+                      <span><a class="zoom" data-pretty="prettyPhoto" href="{% static "assets/img/dummies/big1.jpg" %}"><img src="{% static "assets/img/icons/zoom_icon.png" %}" alt="" title="Portfolio name" /></a></span>
+                    </article>
+                  </div>
+  
+                  <div class="caption">
+                    <h4><a href="#">{{rs.title}}</a></h4>
+                    <p> {{rs.description}} <br><br>
+                      <div><form method="POST" action="/notecart/addtocart/{{rs.id}}" >
+                        {% csrf_token %}
+                      
+                        <button type="submit" class="btn btn-primary">Favori Listeme Ekle</button> </form>
+                      </div>
+                      </p>
+                  </div>
+  
+                </div>
+              </div>
+            </li>
+            {% endfor %}
+        
+           
+  
+          </ul>
+        </div>
+        <div class="row">
+          <div class="span12">
+            {% if page_obj.paginator.num_pages > 0 %}
+            <div class="pagination">
+              <ul>
+                {% if page_obj.has_previous %}
+                <li><a href="?page={{ page_obj.previous_page_number }}">Prev</a></li>
+                {% else %}
+                <li ><a href="#">Prev</a></li>
+                {% endif %}
+                {% for i in page_obj.paginator.page_range %}
+                {% if page_obj.number == i %}
+                <li class="active"><a href="#">{{i}}</a></li>
+                {% else %}
+                <li ><a href="?page={{i}}">{{i}}</a></li>
+               {% endif %}
+              {% endfor %}
+                
+                {% if page_obj.has_next %}
+
+                <li ><a href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                {% else %}
+
+                 
+                <li><a href="#">Next</a></li>
+            
+            {% endif %}
+            
+              </ul> {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+   
+
+  {% include "footer.html" %}
+ 

@@ -1,0 +1,168 @@
+<!-- Contact Start -->
+{% load static %}
+
+{% include "head.html" %}
+{% include "header.html" %}
+{% include "search.html" %}
+
+
+<script>
+  if(window.location.hostname === "pdfobject.com"){
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag("js", new Date());
+      gtag("config", "G-DX6BNQ0S60");
+  }
+  </script>
+  
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://unpkg.com/pdfobject@2.2.12/pdfobject.min.js"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
+
+
+<style>
+.pdfobject-container { height: 28rem; border: 0.4rem solid rgba(0,0,0,.1); }
+</style>
+
+<!-- divider -->
+<div class="row">
+  <div class="span12">
+    <div class="divider"></div>
+  </div>
+</div>
+<!-- end divider -->
+
+<div class="container">
+<div class="row">
+  
+  <div class="span6">
+    <h3 class="heading-success"><span class="btn btn-large btn-success">
+      <i class="m-icon-big-swapright m-icon-white"></i></span>
+      &nbsp;&nbsp; {{notes.title}} </h3>
+
+    <div id="myCarousel" class="carousel slide testimonials">
+      <div class="carousel-inner">
+        <div class="item active">
+          
+          <div class="testimonial">
+            <img src="{{notes.image.url}}" alt="" />
+            <blockquote>
+              <p>
+                {{notes.title}}
+              </p>
+            </blockquote>
+            <div class="info">
+              <span class="author"><strong>  </strong></span>
+              <span class="company">  </span>
+            </div>  
+          </div> 
+        </div>
+        {% for rs in images %}
+        <div class="item">
+          <div class="testimonial">
+            <img src="{{rs.image.url}}" alt="{{rs.title}}"/>
+            <blockquote>
+              <p>
+                {{rs.title}}
+              </p>
+            </blockquote>
+            <div class="info">
+              
+            </div>
+          </div>
+        </div> {%endfor%}
+      </div>
+      <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+      <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+    </div>
+  </div>
+  
+
+  <div class="span6">
+    <h3 class="heading-success"><span class="btn btn-large btn-success">
+      <i class="m-icon-big-swapright m-icon-white"></i></span>
+      &nbsp;&nbsp;Not Detayları    </h3>
+    <div class="accordion" id="accordion2">
+      <div class="accordion-group">
+        <div class="accordion-heading">
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+      1. Puan Verme ve Yorum Yapma
+      </a>
+        </div>
+        <div id="collapseOne" class="accordion-body collapse in">
+          <div class="accordion-inner">
+            <img src="{% static "assets/img/icons/responsive-icon.png" %}" class="alignleft" alt="" />
+            <h5>Nota Puan Ver ve Yorum Yap!</h5>
+            <p>
+             Paylaşılan notu puanlamak ve yorum yapmak için aşağıdaki linki tıklayınız.
+            </p>
+           <center> <a class="btn btn-medium btn-orange" href="{% url 'comment' notes.id notes.slug %}">Puanla ve Yorum Yap</a></center>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-group">
+        <div class="accordion-heading">
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+      2. PDF olarak Paylaşılan Not
+      </a>
+        </div>
+        <div id="collapseTwo" class="accordion-body collapse">
+          <div class="accordion-inner">
+            <img src="assets/img/icons/design-icon.png" class="alignleft" alt="" />
+            <h5> <center>Eklenen notun PDF versiyonu</h5></center>
+            <p>
+              <div>
+                
+              </div>
+              <div id="example1"></div>
+                    <script> PDFObject.embed("{{notes.filePdf.url}}", "#example1"); </script>
+              
+               <center> <a class="btn btn-medium btn-primary" href="/notes/pdf_view/{{notes.id}}">Daha Geniş Görüntülemek İçin Tıklayınız</a></center>
+          </p> <center> <a class="btn btn-medium btn-success" href="{{notes.filePdf.url}}">Tarayıcıda PDF Görüntülemek İçin Tıklayınız</a></center>
+        </p>
+            <center> <a class="btn btn-medium btn-orange" href="{% url 'comment' notes.id notes.slug %}">Puanla ve Yorum Yap</a></center>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-group">
+        <div class="accordion-heading">
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+      3. Notun Zengin Metin Versiyonu
+      </a>
+        </div>
+        <div id="collapseThree" class="accordion-body collapse">
+          <div class="accordion-inner">
+            <img src="assets/img/icons/statistic-icon.png" class="alignleft" alt="" />
+            <h5> {{notes.title}} </h5>
+            <p>
+              {{notes.detail | safe}}
+            </p>
+            <center> <a class="btn btn-medium btn-orange" href="{% url 'comment' notes.id notes.slug %}">Puanla ve Yorum Yap</a></center>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-group">
+        <div class="accordion-heading">
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour">
+      4. Paylaşılan Notla İlgili Tarihsel Bilgiler
+      </a>
+        </div>
+        <div id="collapseFour" class="accordion-body collapse">
+          <div class="accordion-inner">
+            <img src="assets/img/icons/wp-icon.png" class="alignleft" alt="" />
+            <h5>Paylaşılan Notla İlgili Tarihsel Bilgiler</h5>
+            <p>
+              Yüklenme Tarihi / Saati : {{notes.create_at | date:" d . m . Y / h : m : s"}} <br>
+              Güncellenme Tarihi / Saati :{{notes.update_at | date:" d . m . Y / h : m : s"}}
+            </p>
+            <center> <a class="btn btn-medium btn-orange" href="{% url 'comment' notes.id notes.slug %}">Puanla ve Yorum Yap</a></center>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div
+
+  {% include "footer.html" %}
+ 

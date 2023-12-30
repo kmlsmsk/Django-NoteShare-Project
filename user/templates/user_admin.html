@@ -1,0 +1,108 @@
+
+{% extends "homebase.html" %}
+{% load static %}
+
+
+{% block title %}  Profile [ {{user.first_name}} {{user.last_name}} ]{% endblock title %}
+{% block keywords %} {{setting.keywords}} {% endblock keywords %}
+{% block description %} {{setting.description}} {% endblock description %}
+
+{% block head %} 
+<link rel='shortcut icon' type='image/x-icon' href='{{setting.icon.url}}'/>
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+{% endblock head %}
+
+{% block content  %}  
+
+{% include "head.html" %}
+{% include "header.html" %}
+
+{% include "search.html" %}
+ 
+
+<section id="maincontent">
+    <div class="container">
+      <div class="row">
+        <div class="span3">
+          <aside>
+            <div class="widget">
+              {% include "admin_panel.html" %}
+            </div>
+            <div class="widget">
+              
+            </div>
+          </aside>
+        </div>
+        <div class="span9">
+          <aside>
+            <div class="widget">
+
+              <div class="well well-primary">
+                <center><b> <h3>ADMİN YÖNETİM PANELİ </b></h3></center>
+              </div>
+             
+              <table class="table">
+                <thead>
+                  <tr>
+                    <td colspan="3">
+                     
+                      </center></td>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                  <tr>
+                    
+                    <td colspan="3">
+                      
+                      </td>
+                    
+                  </tr>
+                  <tr>
+                   <th><td> 
+                   <center> Bu bölümde admin onay ve yönetim işleri yürütülmektedir. <br>
+                    Detaylı admin işlemleri için <a href="/admin"> tıklayınız.</a></center>
+                   </th></td> 
+                  </tr>
+                  
+                </tbody>
+              </table>
+
+
+
+
+              <table class="table">
+                <thead>
+                 
+                </thead>
+                <tbody>
+                 
+                 
+                  <tr>
+                    
+                  </tr>
+                  
+                </tbody>
+              </table>
+
+
+
+            </div>
+            <div class="widget">
+              
+            </div>
+          </aside>
+          
+          
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  {% endblock content  %}

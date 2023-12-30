@@ -1,0 +1,97 @@
+{% load static %}
+
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+<script>
+
+  $(function() {
+    $("#query").autocomplete({
+      source: "/note_search_auto/",
+      select: function (event, ui) { //item selected
+        AutoCompleteSelectHandler(event, ui)
+      },
+      minLength: 2,
+    });
+  });
+
+  
+
+  function AutoCompleteSelectHandler(event, ui)
+  {
+    var selectedObj = ui.item;
+  }
+
+</script>
+
+<!-- Subhead
+================================================== -->
+<section id="subintro">
+  <div class="jumbotron subhead" id="overview">
+    <div class="container">
+      <div class="row">
+        <div class="span1">
+          <h3><i class="m-icon-big-swapright m-icon-white"></i> </h3>
+          <p></p>
+        </div>
+        <div class="span4">
+          <h5>
+            {% load static %}
+            <ul class="nav">
+            {% load mptt_tags %}
+            <li class="dropdown primary">
+              
+                <div class="btn-toolbar">
+                  <div class="btn-group">
+                  <a class="btn" href="#"><i class="icon-align-justify"> </i>
+                    <b>&nbsp;&nbsp;KATEGORİLER&nbsp;&nbsp; </a>
+                  </div></b>
+                </div>
+              <ul class="dropdown-menu">
+                {% recursetree category %}
+                <li class="dropdown"> <a href="{% url 'category_notes' node.id node.slug %}" class="dropdown-toggle" {% if not node.is_leaf_node %} data-toggle="dropdown" aria-expanded="true" {% endif %}>{{ node.title }}</a>
+                  {% if not node.is_leaf_node %}
+                  <ul class="dropdown-menu sub-menu">
+                    <li>{{ children }} </li>
+                    
+                  </ul>{% endif %}
+                </li>{% endrecursetree %}
+              </ul> </h5>
+            
+        </div><form class="form-search" action="/note_search/" method="POST">
+        <div class="span4">
+          {% load mptt_tags %}
+         
+          <select  name="catid" id="catid">
+            <option value="a" name="catid" id="catid"> Kategorilerde Ara (Tüm) </option>
+            {% recursetree category %}
+            {% if node.is_leaf_node %}
+              <option value="{{node.id}}" id="{{node.id}}"> {{node.title}} </option> {% endif %}
+            {% if not node.is_leaf_node %}
+              <optgroup label="{{node.title}}" id="catid"> {{children}} </optgroup>
+              {% endif %} 
+              {% endrecursetree %}
+            </select> 
+        </div>
+
+        <div class="span3">
+          <div class="input-append">
+        
+
+              {% csrf_token %}
+              <input id="query" name="query" class="input-medium search-query" type="text" placeholder="Kelime Girin!">
+              <button type="submit" class="btn btn-inverse">Ara</button>
+            
+              
+              </form>
+              </div>  
+            
+          </div>
+        
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"> </script>

@@ -1,0 +1,90 @@
+
+{% extends "homebase.html" %}
+{% load static %}
+
+
+{% block title %} İçerik Ekleme [ {{user.first_name}} {{user.last_name}} ] {% endblock title %}
+{% block keywords %} {{setting.keywords}} {% endblock keywords %}
+{% block description %} {{setting.description}} {% endblock description %}
+
+{% block head %} 
+<link rel='shortcut icon' type='image/x-icon' href='{{setting.icon.url}}'/>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor.js" %}"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/40.1.0/classic/ckeditor.js"></script>
+
+{% endblock head %}
+
+{% block content  %}  
+
+{% include "head.html" %}
+{% include "header.html" %}
+
+{% include "search.html" %}
+ 
+
+<section id="maincontent">
+    <div class="container">
+      <div class="row">
+        <div class="span3">
+          <aside>
+            <div class="widget">
+              {% include "user_panel.html" %}
+            </div>
+            <div class="widget">
+              
+            </div>
+          </aside>
+        </div>
+        <div class="span9">
+          <aside>
+            <div class="widget">
+
+              <table class="table table-bordered">
+
+                <thead>
+                  <tr>
+                    <td colspan="7"><b> <center><font color="blue"> <h5> İÇERİK EKLEME ve GÜNCELLEME İŞLEMLERİ </font> </h5></center> </b></td>
+                  </tr>
+                </thead>
+                <tr>
+                  <th>
+                  <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                      {{form.media}}
+                      {{form.as_p}}
+                    </fieldset>
+                    <div class="form-group">
+                      <button class="btn btn-primary" type="submit"> Kaydet </button>
+                    </div>
+
+
+                  </form>
+
+                </th>
+                </tr>
+
+              </table>             
+
+
+
+            </div>
+            <div class="widget">
+              
+            </div>
+          </aside>
+          
+          
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  {% endblock content  %}

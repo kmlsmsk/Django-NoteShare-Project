@@ -1,0 +1,158 @@
+{% load static %}
+<link href="{% static "assets/css/prettyPhoto.css" %}" rel="stylesheet">
+<link href="{% static "assets/js/google-code-prettify/prettify.css" %}" rel="stylesheet">
+
+<!-- styles -->
+<link href="{% static "assets/css/bootstrap.css" %}" rel="stylesheet">
+<link href="{% static "assets/css/bootstrap-responsive.css" %}" rel="stylesheet">
+<link href="{% static "assets/css/docs.css" %}" rel="stylesheet">
+<link href="{% static "assets/css/prettyPhoto.css" %}" rel="stylesheet">
+<link href="{% static "assets/js/google-code-prettify/prettify.css" %}" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300|Open+Sans:400,300,300italic,400italic" rel="stylesheet">
+<link href="{% static "assets/css/style.css" %}" rel="stylesheet">
+<link href="{% static "assets/color/success.css" %}" rel="stylesheet">
+  
+
+
+<div class="container">
+  <div class="row">
+    <div class="span12">
+      <div class="tagline">
+        <div class="row">
+          <div class="span7">
+            <div class="tagline_text">
+              <h2> <span class="text-success"> HABERLER </span></h2>
+              <div class="tag_list">
+                <ul>
+                  <li><span><i class="icon-briefcase"></i> En güncel bilgiler </span></li>
+                  <li><span><i class="icon-folder-open"></i> En yeni notlar</span></li>
+                  <li><span><i class=" icon-search"></i> Bilimsel gerçekler burada <i class=" icon-hand-down"></i> </span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="span5">
+            
+            <div class="tagline_text">
+              <h2> <span class="text-success"> DUYURULAR </span></h2>
+              <div class="tag_list">
+                <ul>
+                  <li><span><i class="icon-bell"></i> Takip edin </span></li>
+                  <li><span><i class="icon-resize-small"></i> Bağlı kalın </span></li>
+                  <li><span><i class="icon-bullhorn"></i> İlk siz ulaşın <i class=" icon-hand-down"></i> </span></li>
+                </ul>
+              </div>
+            </div>
+            
+
+          </div>
+
+
+        </div>
+      </div>
+      <iframe src="/curriculumVitae/news/" width="100%" height="450" style="border:1px solid green;">
+      </iframe>
+    </div>
+
+    
+
+  </div>
+</div>
+
+<!-- end tagline -->
+
+
+
+<section id="maincontent">
+  <div class="container">
+
+    <div class="row">
+      <div class="span3">
+        <h3 class="heading-success"><span class="btn btn-large btn-success"><i class="m-icon-big-swapright m-icon-white"></i></span>
+          &nbsp;&nbsp;Eklenen Notlar</h3>
+        <p>Bu kısımda eklenen notlar arasından admin tarafından onaylanan rastgele seçilmiş 3 tane not bu bölümde yer almaktadır. Diğer notlara ulaşmak için kategoriler kısmından ulaşabilir, arama yapabilir veya anasayfadaki kısımları inceleybilirsiniz.</p>
+        <p> Daha fazla paylaşılan notlar için <a href="/curriculumVitae/contentcategory/"> Tıklayınız</a>. </p>
+        <p> <center><a class="btn btn-success btn-lg" href="/curriculumVitae/contentcategory/"> PAYLAŞILAN NOTLAR</a> </center> <p>
+      </div>
+
+      {% for rs in randomNotes %}
+      <div class="span3">
+        <div class="well well-primary box">
+          <img src=" {{rs.image.url}} " alt="" />
+          <h3> {{rs.title}} </h3>
+          <p>
+           {{rs.description}}
+          </p>
+          <a class="btn btn-info btn-lg" href="{% url 'note_details' rs.id rs.slug %}">NOT DETAY</a>
+        </div>
+      </div>
+      {% endfor%}
+      
+      
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<section id="bottom">
+  <div class="container">
+
+    <!-- divider -->
+    <div class="row">
+      <div class="span12">
+        <div class="divider">
+
+        </div>
+      </div>
+    </div>
+    <!-- end divider -->
+
+
+    <div class="row">
+      <div class="span12">
+        <h3><a class="btn btn-large btn-success" href="#">
+          <i class="m-icon-big-swapdown m-icon-white"></i></a> Eklenen Notlar </h3>
+
+        <div id="latest-work" class="carousel btleft">
+          <div class="carousel-wrapper">
+
+            <ul class="portfolio-home da-thumbs">
+              
+              
+              {% for rs in notes %}
+              
+              <li class="portfolio-item2" data-id="{{rs.id}}" data-type="web">
+                <div class="thumbnail">
+                  <div class="image-wrapp">
+                    
+                    <img src=" {{rs.image.url}} " alt="Portfolio name" title="" />
+                    <article class="da-animate da-slideFromRight" style="display: block;">
+                     
+                      <a class="link_post" href="{% url 'note_details' rs.id rs.slug %}" onclick="window.open('{% url 'note_details' rs.id rs.slug %}')" target="_self">
+                        <img src="{% static "assets/img/icons/link_post_icon.png" %}" alt=""/></a>
+                      <span><a class="zoom" data-pretty="prettyPhoto" href="{{rs.image.url}}"><img src="{% static "assets/img/icons/zoom_icon.png" %}" alt="" title=" {{rs.title}} " /></a></span>
+                    </article>
+                  </div>
+                  <div class="caption">
+                    <h5>  {{rs.title}} </h5>
+                  </div>
+                  
+                  <button href= " " class="btn btn-large btn-block btn-success" type="button">
+                    {{rs.create_at |date:"d.m.Y - h:m:s  D"}}
+                  </button>
+                </div>
+              </li>
+              {% endfor%}
+              
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

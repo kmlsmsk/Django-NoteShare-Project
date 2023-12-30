@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="utf-8">
+    <title> Kemal ŞİMŞEK - Matematik Öğretmeni</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Kemal ŞİMŞEK " name="keywords">
+    <meta content="Kemal ŞİMŞEK " name="description">
+
+    <!-- Favicon -->
+    <link href="{% static "cv/img/favicon.ico" %}" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static "cv/lib/owlcarousel/assets/owl.carousel.min.css" %}" rel="stylesheet">
+    <link href="{% static "cv/lib/lightbox/css/lightbox.min.css" %}" rel="stylesheet">
+  
+    
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static "cv/css/style.css" %}" rel="stylesheet">
+
+   
+
+
+</head>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+
+
+<script>
+    $(document).ready(function(){ 
+        $("#query").autocomplete({
+            source: "/search_auto/",
+            minLength: 2,
+            open: function(){
+                setTimeout(function () {
+                    $('.ui-autocomplete').css('z-index', 99);
+                }, 0);
+            }
+          });
+    });
+</script>
+
+
+<body data-spy="scroll" data-target=".navbar" data-offset="51">
+    
+
+
+    <!-- Contact Start -->
+    <div class="container-fluid py-5" id="contact">
+        <div class="container">
+            <div class="position-relative d-flex align-items-center justify-content-center">
+                <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">ARAMA</h1>
+                <h1 class="position-absolute text-uppercase text-primary">Not Arama</h1>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-form text-center">
+                        <div id="success"></div>
+                                             
+                                                    
+
+                            
+                            <form class="form-search" action="/note_search/" method="POST">
+                              
+                              
+                                {% load mptt_tags %}
+                               
+                                <select  name="catid" id="catid">
+                                  <option value="a" name="catid" id="catid"> Kategorilerde Ara (Tüm) </option>
+                                  {% recursetree category %}
+                                  {% if node.is_leaf_node %}
+                                    <option value="{{node.id}}" id="{{node.id}}"> {{node.title}} </option> {% endif %}
+                                  {% if not node.is_leaf_node %}
+                                    <optgroup label="{{node.title}}" id="catid"> {{children}} </optgroup>
+                                    {% endif %} 
+                                    {% endrecursetree %}
+                                  </select> 
+                             
+                      
+                              
+                                <div class="input-append">
+                              
+                      
+                      <hr>
+                                    {% csrf_token %}
+                                    <input id="query" name="query" class="form-control p-4" type="text" placeholder="Kelime Girin!">
+                                    <hr>
+                                    <button type="submit" class="btn btn-info"> Ara </button>
+                                  
+                                    </form>
+                              
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->
+
+
+
+      
+
+
+    
